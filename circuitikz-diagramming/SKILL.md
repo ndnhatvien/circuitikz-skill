@@ -132,7 +132,7 @@ Use `++(dx,dy)` for chain layout; use `+(dx,dy)` when you need a temporary offse
 | `i_>` / `i^>` / `i_<` / `i^<` | Current position & direction | `i_>=$i$` |
 | `type=text` | Shortcut label (passives) | `to[R=$R_1$]` ≡ `to[R, l=$R_1$]` |
 | Active sources `=` | Sets **v** or **i**, not `l` | `to[V=$v_s$]` |
-| `*-`, `-*, `o-*`, `*-o` | Connection poles | `to[R, *-o]` |
+| `*-`, `-*`, `o-`, `-o`, `*-o`, `o-*`, `*-*`, `o-o` | Connection poles | `to[R, *-o]` |
 | `name=foo` | Name bipole for anchors | `to[R, name=R1]` → `(R1.n/s/…)` |
 
 **Brace labels** that contain `=` or `,`:

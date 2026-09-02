@@ -153,7 +153,7 @@ For T-junctions, place a single `*-` / `circ` at the shared coordinate.
   capacitors/scale=0.85,
   sources/scale=0.9,
   amplifiers/scale=0.85,
-  tripoles/scale=0.9,
+  transistors/scale=0.9,
 }
 ```
 

@@ -44,8 +44,6 @@ Almost everything in this file is **path bipoles** (or terminal **nodes** like `
 | `sR` / `resistivesens` | Generic resistive sensor |
 | `phR`, `photoresistor` | Photoresistor |
 | `thR`, `thermistor` | Thermistor |
-| `tR` | Tunable / adjustable styles (see manual) |
-| `cR` | Cute resistor (when cute style active) |
 
 ```latex
 \draw (0,0) to[R, l=$R_1$] ++(2,0);
@@ -133,16 +131,16 @@ Style switch:
 |------|---------|
 | `sV`, `vsourcesin` | Sinusoidal voltage |
 | `sI`, `isourcesin` | Sinusoidal current |
-| `squareV` / square voltage | Square-wave voltage |
-| `noise` sources | Noise source bipoles |
+| `sqV`, `square voltage source` | Square-wave voltage |
+| `vsourceN`, `isourceN` | Noise voltage / current sources |
 | `pvsource` | Photovoltaic source |
 | `cV`, `cI` | Controlled sources (diamond) |
-| `sV` controlled variants | Dependent sinusoidal forms |
 
 ```latex
 \draw (0,0) to[sV, v=$v_s(t)$] ++(0,2);
 \draw (0,0) to[sI, i=$i_s$] ++(2,0);
-\draw (0,0) to[square voltage, v=$v_{\mathrm{clk}}$] ++(0,2);
+\draw (0,0) to[sqV, v=$v_{\mathrm{clk}}$] ++(0,2);
+\draw (0,0) to[vsourceN, v=$e_n$] ++(0,2);
 ```
 
 Empty source shell for generic independent: often `V` / `I` is enough.
@@ -159,7 +157,7 @@ Empty source shell for generic independent: often `V` / `I` is enough.
 | `zD`, `zener` | Zener diode |
 | `sD`, `Schottky diode` | Schottky |
 | `pD`, `pDiode` | Photodiode |
-| `Tu`, `tunnel diode` | Tunnel diode |
+| `tD`, `tunnel diode` | Tunnel diode |
 | `VC`, `varcap` | Varicap |
 | `Ty`, `thyristor` | Thyristor / SCR |
 | `Tr`, `triac` | TRIAC |
@@ -212,7 +210,7 @@ Power flags often sit directly on a coordinate without an extra stub if spacing 
 | `open` | Open bipole (gap; good for voltage probes) |
 | `circ` | Filled connection dot (also `*-` style poles) |
 | `ocirc` | Open circle pole |
-| `*-`, `-*, `*-*`, `o-*`, `*-o`, `o-o` | Inline poles on bipoles |
+| `*-`, `-*`, `*-*`, `o-`, `-o`, `*-o`, `o-*`, `o-o` | Inline poles on bipoles |
 | crossing styles | Jump / bridge at wire crossings |
 
 ```latex

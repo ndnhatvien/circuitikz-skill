@@ -173,11 +173,9 @@ Default ordering depends on style; set `noinv input up/down` explicitly when the
 
 ```latex
 \draw (0,0) node[op amp] (oa) {\texttt{OA1}};
-% or
-\draw (0,0) node[op amp, circuitikz/amplifiers/text={A1}] (oa) {};
 ```
 
-(Exact text key may be package-version specific; placing text as node content is widely supported.)
+(Node text is the widely supported way to label an amplifier; there is no portable `\ctikzset` text key across versions.)
 
 ---
 

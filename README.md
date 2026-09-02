@@ -46,7 +46,8 @@ Use it when you need to:
 ## Quick example
 
 ```latex
-\begin{circuitikz}[american, RPvoltages]
+% preamble: \usepackage[RPvoltages, american]{circuitikz}
+\begin{circuitikz}[american]
   \draw (0,0)
     to[battery2, l=$V_s$, invert] ++(0,2)
     to[R=$R$, i=$i$] ++(3,0)
@@ -54,6 +55,8 @@ Use it when you need to:
     -- (0,0);
 \end{circuitikz}
 ```
+
+Note: `RPvoltages` is a **package option** (goes in `\usepackage[...]{circuitikz}`), not an environment option — putting it in `\begin{circuitikz}[...]` is a pgfkeys error.
 
 Defaults encouraged by the skill:
 
@@ -67,7 +70,6 @@ Defaults encouraged by the skill:
 ```text
 circuitikz-diagramming/
 ├── SKILL.md
-├── assets/
 └── references/
     ├── components.md
     ├── active-devices.md
@@ -99,4 +101,4 @@ circuitikz-diagramming/
 
 ## License
 
-MIT — see skill content and this repository for usage as an agent skill.
+MIT — see [LICENSE](LICENSE).
