@@ -1,6 +1,6 @@
 ---
 name: circuitikz-diagramming
-description: Generate publication-quality electronic circuit diagrams with CircuiTikZ (LaTeX/TikZ). Use when drawing, fixing, or explaining circuits in LaTeX—resistors, capacitors, transistors, op-amps, logic gates, sources, labels/voltages/currents—or when the user mentions circuitikz, CircuiTikZ, TikZ circuits, schematic figures for papers, or wants Overleaf/TikZJax-ready circuit code. Targets CircuiTikZ 1.8.x (stable 1.8.6+).
+description: Generate publication-quality electronic circuit schematics with CircuiTikZ (LaTeX/TikZ) — resistors, capacitors, diodes, transistors (BJT/MOSFET), op-amps, logic gates, sources, and labels/voltages/currents. Use when drawing, fixing, or explaining circuits in LaTeX; when the user mentions circuitikz, CircuiTikZ, TikZ circuits, schematic figures, or Overleaf/TikZJax circuit code; or in Vietnamese when asked to vẽ mạch điện, sơ đồ mạch điện tử, mạch khuếch đại, mạch nguồn, mạch chỉnh lưu. Targets CircuiTikZ 1.8.x (stable 1.8.6+).
 ---
 
 # CircuiTikZ Diagramming
@@ -20,8 +20,11 @@ Load detailed references only when needed (see table below). Keep output minimal
 3. **Place with relative coords** — start at origin, chain with `--` and `++(dx,dy)`; name key nodes.
 4. **Connect with path bipoles and node multipoles** — never mix absolute wanders when a relative step works.
 5. **Add labels, v, i** — after topology is correct; brace labels that contain `=` or `,`.
-6. **Self-check** — compile mentally against the quality checklist; fix anti-patterns.
-7. **Deliver** — fragment for papers/Overleaf, or standalone / TikZJax wrapper if requested.
+6. **Self-check** — run the quality checklist; fix anti-patterns.
+7. **Verify by compiling** (when a TeX engine is available) — render to PDF/PNG with
+   `scripts/render.ps1`, look at the image, fix what is wrong. Prefer this over "compiling
+   mentally" for anything non-trivial.
+8. **Deliver** — fragment for papers/Overleaf, or standalone / TikZJax wrapper if requested.
 
 ## References (progressive disclosure)
 
@@ -31,6 +34,7 @@ Load detailed references only when needed (see table below). Keep output minimal
 | [references/active-devices.md](references/active-devices.md) | BJT, MOSFET, JFET, op-amps, logic ports, transformers |
 | [references/labels-voltages-currents.md](references/labels-voltages-currents.md) | Labels, annotations, voltage/current arrows, poles, `name=`, invert/mirror |
 | [references/templates.md](references/templates.md) | Ready-to-paste full circuits (dividers, filters, amps, logic) |
+| [references/ktmdt-templates.md](references/ktmdt-templates.md) | Kỹ thuật Mạch điện tử course circuits: Zener/linear regulators, bridge rectifier, BJT/MOSFET amps, diff pair, op-amp difference/integrator, Schmitt, Sallen–Key, current mirror, push–pull, H-bridge, 555, multi-stage; + Vietnamese labels |
 | [references/troubleshooting.md](references/troubleshooting.md) | Parse errors, wrong arrows, missing anchors, scaling, TikZJax limits |
 
 ## Document skeleton
@@ -202,6 +206,31 @@ Full lists: [components.md](references/components.md), [active-devices.md](refer
 | Editable seed | Mention Designer export if layout is very dense |
 
 Default: **american + RPvoltages**, relative placement, math-mode labels (`$R_1$`).
+
+## Verify by compiling (recommended)
+
+A TeX engine turns "compile mentally" into "look at the picture". The bundled script wraps
+a bare snippet in a `standalone` document, compiles it, and rasterises page 1 to PNG:
+
+```powershell
+# bare snippet -> wrapped automatically
+pwsh scripts/render.ps1 -Source '\begin{circuitikz}\draw (0,0) to[R] ++(2,0);\end{circuitikz}'
+# a .tex file, with Vietnamese labels, then open the PNG
+pwsh scripts/render.ps1 -Source .\fig.tex -Vietnam -Open
+```
+
+- Prints `STATUS=ok` with `PDF`/`PNG` paths, or `STATUS=error` with the notable LaTeX
+  error lines (read them, fix, re-run).
+- Options: `-Engine pdflatex|xelatex|lualatex`, `-DPI 150`, `-OutDir <dir>`, `-Open`.
+- Requires a TeX distribution: `pdflatex` + `pdftoppm` (TeX Live ships both; on MiKTeX
+  install poppler for `pdftoppm`). If no engine is present, fall back to the checklist.
+
+### Vietnamese labels
+
+Keep component/variable labels in math mode (`$R_1$`, `$V_{CC}$`) — language-neutral and
+robust. Only for **actual Vietnamese words** in annotations must the engine support the
+diacritics: `-Vietnam` switches to `xelatex` and loads `fontspec`/`Times New Roman`
+automatically. Avoid Vietnamese text on minimal TikZJax hosts.
 
 ## Quality checklist
 
